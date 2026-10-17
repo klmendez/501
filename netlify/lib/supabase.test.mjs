@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { S3Client } from "@aws-sdk/client-s3";
+import sharp from "sharp";
 
 process.env.SUPABASE_URL = "https://example.supabase.co";
 process.env.SUPABASE_SECRET_KEY = "sb_secret_test";
@@ -50,6 +51,41 @@ test("sube, comprueba y borra una foto de R2", async (context) => {
   assert.deepEqual(calls[0].input.Body, Buffer.from([1, 2, 3]));
   assert.equal(calls[0].input.ContentType, "image/webp");
   assert.equal(calls[0].input.Key, `catalog/${id}`);
+});
+
+test("/admin acepta una foto con otro fondo y la reduce antes de subirla", async (context) => {
+  const originalSend = S3Client.prototype.send;
+  let uploaded;
+  S3Client.prototype.send = async (command) => { uploaded = command.input; return {}; };
+  context.after(() => { S3Client.prototype.send = originalSend; });
+
+  const photo = await sharp({ create: { width: 1600, height: 2400, channels: 3, background: { r: 120, g: 90, b: 70 } } }).png().toBuffer();
+  const response = await admin(new Request("http://localhost:5173/.netlify/functions/admin?action=upload", {
+    method: "POST", headers: { "Content-Type": "image/png" }, body: photo,
+  }));
+  assert.equal(response.status, 200);
+  assert.equal(uploaded.ContentType, "image/webp");
+  const dimensions = await sharp(uploaded.Body).metadata();
+  assert.equal(dimensions.width, 800);
+  assert.equal(dimensions.height, 1200);
+});
+
+test("/admin guarda un JPG reducido como WebP en R2", async (context) => {
+  const originalSend = S3Client.prototype.send;
+  let uploaded;
+  S3Client.prototype.send = async (command) => { uploaded = command.input; return {}; };
+  context.after(() => { S3Client.prototype.send = originalSend; });
+
+  const photo = await sharp({ create: { width: 1800, height: 1200, channels: 3, background: { r: 40, g: 60, b: 90 } } }).jpeg({ quality: 95 }).toBuffer();
+  const response = await admin(new Request("http://localhost:5173/.netlify/functions/admin?action=upload", {
+    method: "POST", headers: { "Content-Type": "image/jpeg" }, body: photo,
+  }));
+  assert.equal(response.status, 200);
+  assert.equal(uploaded.ContentType, "image/webp");
+  const metadata = await sharp(uploaded.Body).metadata();
+  assert.equal(metadata.format, "webp");
+  assert.equal(metadata.width, 1200);
+  assert.equal(metadata.height, 800);
 });
 
 test("/admin publica un producto con foto en R2 y datos en Supabase", async (context) => {

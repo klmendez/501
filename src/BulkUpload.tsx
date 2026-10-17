@@ -270,7 +270,7 @@ export default function BulkUpload() {
       <label className="bulk-dropzone" onDragOver={(event) => event.preventDefault()} onDrop={(event) => { event.preventDefault(); void addFiles(event.dataTransfer.files); }}>
         <ImagePlus size={34} />
         <strong>{busy ? "Procesando imágenes…" : "Arrastra fotos o selecciónalas aquí"}</strong>
-        <small>JPG, PNG o WebP · hasta 15 MB por foto · una o varias fotos</small>
+        <small>JPG, PNG o WebP · hasta 15 MB por foto · se reducen y guardan como WebP</small>
         <input ref={inputRef} type="file" accept="image/jpeg,image/png,image/webp" multiple disabled={busy} onChange={(event) => void addFiles(event.target.files)} />
       </label>
       {notice && <p className="bulk-notice" role="status">{notice}</p>}

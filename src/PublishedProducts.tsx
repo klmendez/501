@@ -150,7 +150,7 @@ export default function PublishedProducts({ password, revision }: { password: st
         <span>{index === 0 ? "Portada" : `Foto ${index + 1}`}</span>
         <div><button type="button" onClick={() => movePhoto(index, -1)} disabled={busy || index === 0} aria-label="Mover foto a la izquierda"><ArrowUp size={15} /></button><button type="button" onClick={() => movePhoto(index, 1)} disabled={busy || index === photos.length - 1} aria-label="Mover foto a la derecha"><ArrowDown size={15} /></button><button type="button" onClick={() => removePhoto(photo.key)} disabled={busy} aria-label="Quitar foto"><Trash2 size={15} /></button></div>
       </div>)}</div>
-      <label className="published-editor__add">Agregar fotos<input type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(event) => { addPhotos(event.target.files); event.target.value = ""; }} disabled={busy} /></label>
+      <label className="published-editor__add">Agregar fotos (se guardan reducidas en WebP)<input type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(event) => { addPhotos(event.target.files); event.target.value = ""; }} disabled={busy} /></label>
       <div className="bulk-fields">
         <label>Nombre<input required maxLength={120} value={editing.name} onChange={(event) => update({ name: event.target.value })} /></label>
         <label>Referencia única<input required maxLength={60} value={editing.reference} onChange={(event) => update({ reference: event.target.value })} /></label>

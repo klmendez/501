@@ -4,7 +4,7 @@ import { authorizeAdmin } from "../lib/admin-auth.mjs";
 import { catalogState, staticProducts, visibleProducts } from "../lib/catalog-products.mjs";
 import { catalogStore } from "../lib/supabase.mjs";
 import { deletePhoto, photoExists, publicPhotoUrl, r2PhotoId, savePhoto } from "../lib/photo-storage.mjs";
-import { hasWhiteBackground, optimizedCatalogImage, whiteBackgroundScore } from "../lib/catalog-image.mjs";
+import { optimizedCatalogImage } from "../lib/catalog-image.mjs";
 
 const allowedCategories = new Set(["Jeans", "Chaquetas", "Camisas", "Conjuntos", "Buzos", "Bermudas", "Camisetas"]);
 const allowedGenders = new Set(["Mujer", "Hombre", "Unisex"]);
@@ -80,13 +80,12 @@ export default async (request) => {
 
   if (request.method === "POST" && action === "upload") {
     const contentType = request.headers.get("content-type");
-    if (contentType !== "image/webp" && contentType !== "image/png") return new Response("Formato no permitido.", { status: 415 });
+    if (!["image/jpeg", "image/png", "image/webp"].includes(contentType)) return new Response("Formato no permitido.", { status: 415 });
     const data = await request.arrayBuffer();
     if (data.byteLength === 0 || data.byteLength > 3_000_000) return new Response("La foto supera 3 MB.", { status: 413 });
     let optimized;
     try {
       const bytes = Buffer.from(data);
-      if (!hasWhiteBackground(await whiteBackgroundScore(bytes))) return new Response("La foto debe tener fondo blanco.", { status: 422 });
       optimized = await optimizedCatalogImage(bytes);
     } catch {
       return new Response("No se pudo procesar la foto.", { status: 415 });

@@ -1,4 +1,8 @@
 /catalogo /index.html 200
-/mayoristas /index.html 200
+/categorias /index.html 200
+/categorias/* /index.html 200
+/marcas /index.html 200
+/marcas/* /index.html 200
+/mayoristas /catalogo 301
 /contacto /index.html 200
 /admin /index.html 200

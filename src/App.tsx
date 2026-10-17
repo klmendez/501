@@ -2,12 +2,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
-  BadgePercent,
   Check,
   ChevronDown,
   ChevronRight,
+  Facebook,
   Heart,
   Home,
+  Instagram,
   MapPin,
   Menu,
   MessageCircle,
@@ -25,7 +26,6 @@ import {
   ZoomIn,
   ZoomOut,
 } from "lucide-react";
-import heroImage from "./assets/hero-501.webp";
 import BulkUpload from "./BulkUpload";
 import { categories, products, type Category, type Product } from "./data";
 import { WHATSAPP_PHONE } from "./config";
@@ -37,6 +37,53 @@ type Cart = Record<string, CartItem>;
 type ZoomLens = { x: number; y: number; width: number; height: number; left: number; top: number; size: number };
 
 const LENS_SCALE = 2.5;
+const heroPhotos = ["DSC01261", "DSC01273", "DSC01282", "DSC01404", "DSC01412", "DSC01423", "DSC01427"];
+const brandLogoFiles: Record<string, string> = {
+  "Levi's": "levis.svg",
+  Superdry: "superdry.svg",
+  BOSS: "boss.svg",
+  "Carolina Herrera": "carolinaherrera.svg",
+  Diesel: "diesel.svg",
+  Columbia: "columbia.svg",
+  "The North Face": "thenorthface.svg",
+  Abercrombie: "abercrombie.svg",
+};
+const socialLinks = [
+  { name: "Instagram", handle: "@almacen.501", href: "https://www.instagram.com/almacen.501/", icon: Instagram },
+  { name: "TikTok", handle: "@almacen501", href: "https://www.tiktok.com/@almacen501", icon: null },
+  { name: "Facebook", handle: "Almacén 501", href: "https://www.facebook.com/profile.php?id=61585976413461", icon: Facebook },
+];
+const isModelPhoto = (product: Product) => /^501-FOTO-/i.test(product.reference) || /-modelo\.[a-z0-9]+(?:\?|$)/i.test(product.image);
+const slugify = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+function SocialLinks({ compact = false }: { compact?: boolean }) {
+  return <div className={`social-links ${compact ? "social-links--compact" : ""}`}>
+    {socialLinks.map(({ name, href, icon: Icon }) => <a href={href} key={name} target="_blank" rel="noopener noreferrer" aria-label={`501 en ${name}`}>
+      <span className="social-links__icon">{Icon ? <Icon size={compact ? 18 : 22} strokeWidth={1.8} /> : <img src="/tiktok.svg" alt="" width={compact ? 18 : 22} height={compact ? 18 : 22} />}</span>
+      {!compact && <span className="social-links__label"><strong>{name}</strong></span>}
+      {!compact && <ArrowRight size={18} className="social-links__arrow" />}
+    </a>)}
+  </div>;
+}
+
+function BrandLogo({ name }: { name: string }) {
+  const file = brandLogoFiles[name];
+  return file
+    ? <img className="brand-logo__image" src={`/brands/${file}`} alt="" loading="lazy" />
+    : <span className="brand-logo__mark" aria-hidden="true">{name}</span>;
+}
+
+function HeroSlide({ index, previous = false }: { index: number; previous?: boolean }) {
+  const first = heroPhotos[index].toLowerCase();
+  const second = heroPhotos[(index + 1) % heroPhotos.length].toLowerCase();
+  return <div className={`hero__slide hero__slide--${previous ? "previous" : "current"}`} aria-hidden={previous}>
+    <picture className="hero__photo hero__photo--first">
+      <source media="(max-width: 760px)" srcSet={`/hero/${first}-mobile.webp`} />
+      <img className="hero__image" src={`/hero/${first}.webp`} alt={previous ? "" : "Moda urbana de 501"} fetchPriority={index === 0 && !previous ? "high" : "auto"} />
+    </picture>
+    <div className="hero__photo hero__photo--second" style={{ backgroundImage: `url(/hero/${second}.webp)` }} />
+  </div>;
+}
 
 function ProductImageZoom({ src, alt, onOpen }: { src: string; alt: string; onOpen: () => void }) {
   const [lens, setLens] = useState<ZoomLens | null>(null);
@@ -70,29 +117,23 @@ function whatsappLink(message: string) {
   return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
 }
 
-function productLink(product: Product, mode: Mode) {
-  return `${window.location.origin}/catalogo?producto=${encodeURIComponent(product.reference)}${mode === "wholesale" ? "&tipo=mayorista" : ""}`;
+function productLink(product: Product) {
+  return `${window.location.origin}/catalogo?producto=${encodeURIComponent(product.reference)}`;
 }
 
 function productMessage(product: Product, mode: Mode, size?: string, color?: string) {
   const details = [size && `talla ${size}`, color && `color ${color}`].filter(Boolean).join(", ");
-  return `Hola, quiero preguntar por este producto: ${product.name} (ref. ${product.reference})${details ? `, ${details}` : ""}. Compra ${mode === "retail" ? "al detal" : "mayorista"}.\n${productLink(product, mode)}`;
+  if (mode === "wholesale") return `Hola, soy mayorista y quiero saber el precio de este producto al por mayor: ${product.name} (ref. ${product.reference})${details ? `, ${details}` : ""}. ¿Me confirmas disponibilidad y pedido mínimo?\n${productLink(product)}`;
+  return `Hola, quiero saber el precio de este producto: ${product.name} (ref. ${product.reference})${details ? `, ${details}` : ""}.\n${productLink(product)}`;
 }
 
-function ModeSwitch({ mode, onChange, compact = false }: { mode: Mode; onChange: (mode: Mode) => void; compact?: boolean }) {
-  return (
-    <div className={`mode-switch ${compact ? "mode-switch--compact" : ""}`} aria-label="Tipo de compra">
-      <button className={mode === "retail" ? "active" : ""} onClick={() => onChange("retail")}>
-        Detal
-      </button>
-      <button className={mode === "wholesale" ? "active" : ""} onClick={() => onChange("wholesale")}>
-        Mayorista
-      </button>
-    </div>
-  );
+function carouselStep(viewport: HTMLDivElement) {
+  const first = viewport.querySelector<HTMLElement>("[data-carousel-set] > *");
+  const next = first?.nextElementSibling as HTMLElement | null;
+  return first && next ? next.offsetLeft - first.offsetLeft : first?.offsetWidth ?? 0;
 }
 
-function useAutoCarousel(itemCount: number, speed: number, active: boolean, spotlight = false) {
+function useAutoCarousel(itemCount: number, intervalMs: number, active: boolean, spotlight = false) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -101,14 +142,11 @@ function useAutoCarousel(itemCount: number, speed: number, active: boolean, spot
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let visible = false;
     let paused = false;
-    let frame = 0;
-    let previous = 0;
-    let lastSpotlight = 0;
     let centered: HTMLElement | null = null;
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: 0.1 });
     observer.observe(viewport);
     const pause = () => { paused = true; };
-    const resume = () => { paused = false; previous = 0; };
+    const resume = () => { paused = false; };
     const updateSpotlight = () => {
       const center = viewport.getBoundingClientRect().left + viewport.clientWidth / 2;
       let nearest: HTMLElement | null = null;
@@ -124,28 +162,23 @@ function useAutoCarousel(itemCount: number, speed: number, active: boolean, spot
         centered?.classList.add("is-centered");
       }
     };
-    const tick = (time: number) => {
+    const advance = () => {
       const first = viewport.querySelector<HTMLElement>("[data-carousel-set]");
       const second = first?.nextElementSibling as HTMLElement | null;
       const loopWidth = first && second ? second.offsetLeft - first.offsetLeft : 0;
-      if (visible && !paused && !motion.matches && loopWidth) {
-        if (previous) viewport.scrollLeft += Math.min(time - previous, 64) * speed / 1000;
-        if (viewport.scrollLeft >= loopWidth) viewport.scrollLeft -= loopWidth;
-      }
-      if (spotlight && visible && time - lastSpotlight > 100) {
-        updateSpotlight();
-        lastSpotlight = time;
-      }
-      previous = time;
-      frame = window.requestAnimationFrame(tick);
+      if (!visible || paused || motion.matches || performance.now() < Number(viewport.dataset.manualPauseUntil || 0) || !loopWidth) return;
+      if (viewport.scrollLeft >= loopWidth - 1) viewport.scrollLeft -= loopWidth;
+      viewport.scrollBy({ left: carouselStep(viewport), behavior: "smooth" });
     };
     viewport.addEventListener("pointerenter", pause);
     viewport.addEventListener("pointerleave", resume);
     viewport.addEventListener("focusin", pause);
     viewport.addEventListener("focusout", resume);
-    frame = window.requestAnimationFrame(tick);
+    const autoTimer = window.setInterval(advance, intervalMs);
+    const spotlightTimer = spotlight ? window.setInterval(() => { if (visible) updateSpotlight(); }, 120) : null;
     return () => {
-      window.cancelAnimationFrame(frame);
+      window.clearInterval(autoTimer);
+      if (spotlightTimer) window.clearInterval(spotlightTimer);
       observer.disconnect();
       viewport.removeEventListener("pointerenter", pause);
       viewport.removeEventListener("pointerleave", resume);
@@ -153,9 +186,20 @@ function useAutoCarousel(itemCount: number, speed: number, active: boolean, spot
       viewport.removeEventListener("focusout", resume);
       centered?.classList.remove("is-centered");
     };
-  }, [itemCount, speed, active, spotlight]);
+  }, [itemCount, intervalMs, active, spotlight]);
 
   return ref;
+}
+
+function moveCarousel(viewport: HTMLDivElement | null, direction: -1 | 1) {
+  if (!viewport) return;
+  const first = viewport.querySelector<HTMLElement>("[data-carousel-set]");
+  const second = first?.nextElementSibling as HTMLElement | null;
+  const loopWidth = first && second ? second.offsetLeft - first.offsetLeft : 0;
+  const distance = carouselStep(viewport);
+  if (direction < 0 && loopWidth && viewport.scrollLeft < distance) viewport.scrollLeft += loopWidth;
+  viewport.dataset.manualPauseUntil = String(performance.now() + 2800);
+  viewport.scrollBy({ left: distance * direction, behavior: "smooth" });
 }
 
 function App() {
@@ -163,7 +207,6 @@ function App() {
   const navigate = useNavigate();
   const [catalogProducts, setCatalogProducts] = useState<Product[]>(products);
   const [promotions, setPromotions] = useState<Promotion[]>([]);
-  const [mode, setMode] = useState<Mode>("retail");
   const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const [category, setCategory] = useState<"Todos" | Category>("Todos");
@@ -172,6 +215,8 @@ function App() {
   const [size, setSize] = useState("Todas");
   const [color, setColor] = useState("Todos");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openNavMenu, setOpenNavMenu] = useState<"categorias" | "marcas" | null>(null);
+  const [mobileNavSection, setMobileNavSection] = useState<"categorias" | "marcas" | null>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -183,32 +228,63 @@ function App() {
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
   const [cart, setCart] = useState<Cart>({});
   const [toast, setToast] = useState("");
+  const [heroSlide, setHeroSlide] = useState<{ index: number; previous: number | null }>({ index: 0, previous: null });
   const searchRef = useRef<HTMLInputElement>(null);
   const brands = useMemo(() => ["Todas", ...Array.from(new Set(catalogProducts.map((product) => product.brand)))], [catalogProducts]);
   const sizes = useMemo(() => ["Todas", ...Array.from(new Set(catalogProducts.flatMap((product) => product.sizes)))], [catalogProducts]);
   const colors = useMemo(() => ["Todos", ...Array.from(new Set(catalogProducts.flatMap((product) => product.colors)))], [catalogProducts]);
-  const bestSellers = catalogProducts.slice(0, 4);
-  const visibleCategories = categories.filter((item) => catalogProducts.some((product) => product.category === item.name)).map((item) => ({
-    ...item,
-    image: catalogProducts.find((product) => product.reference === item.reference)?.image
-      ?? catalogProducts.find((product) => product.category === item.name)?.image
-      ?? item.image,
-  }));
+  const homeProducts: Product[] = [];
+  for (const featuredCategory of ["Jeans", "Chaquetas", "Conjuntos", "Camisetas"] as Category[]) {
+    const product = catalogProducts.find((item) => item.category === featuredCategory);
+    if (product) homeProducts.push(product);
+  }
+  for (const product of catalogProducts) {
+    if (homeProducts.length >= 4) break;
+    if (!homeProducts.some((item) => item.reference === product.reference)) homeProducts.push(product);
+  }
+  const visibleCategories = categories.filter((item) => catalogProducts.some((product) => product.category === item.name)).map((item) => {
+    const representative = catalogProducts.find((product) => product.reference === item.reference)
+      ?? catalogProducts.find((product) => product.category === item.name);
+    return { ...item, image: representative?.image ?? item.image, modelImage: representative ? isModelPhoto(representative) : true };
+  });
   const featuredBrands = brands.slice(1).filter((item) => item !== "Sin marca identificada");
+  const logoBrands = featuredBrands.filter((name) => name in brandLogoFiles);
+  const carouselBrands = logoBrands.length > 0 ? logoBrands : featuredBrands;
   const campaignItems = promotions.filter((promotion) => promotion.active).map((promotion) => ({ promotion, product: catalogProducts.find((item) => item.reference === promotion.productReference) })).filter((item): item is { promotion: Promotion; product: Product } => Boolean(item.product));
   const bannerCampaign = campaignItems.find((item) => item.promotion.placement === "banner");
   const featuredCampaigns = campaignItems.filter((item) => item.promotion.placement === "destacado");
-  const page = location.pathname === "/catalogo"
-    ? "catalogo"
-    : location.pathname === "/mayoristas"
-      ? "mayoristas"
-      : location.pathname === "/contacto"
-        ? "contacto"
-        : location.pathname === "/admin"
-          ? "admin"
-        : "inicio";
-  const categoryCarousel = useAutoCarousel(visibleCategories.length, 38, page === "inicio", true);
-  const brandCarousel = useAutoCarousel(featuredBrands.length, 24, page === "inicio");
+  const page = location.pathname === "/catalogo" ? "catalogo"
+    : location.pathname === "/categorias" ? "categorias"
+      : location.pathname.startsWith("/categorias/") ? "categoria"
+        : location.pathname === "/marcas" ? "marcas"
+          : location.pathname.startsWith("/marcas/") ? "marca"
+            : location.pathname === "/contacto" ? "contacto"
+              : location.pathname === "/admin" ? "admin"
+                : "inicio";
+  const routeCategory = page === "categoria" ? categories.find((item) => slugify(item.name) === location.pathname.split("/")[2]) : undefined;
+  const routeBrand = page === "marca" ? featuredBrands.find((name) => slugify(name) === location.pathname.split("/")[2]) : undefined;
+  const categoryCarousel = useAutoCarousel(visibleCategories.length, 6000, page === "inicio", true);
+  const brandCarousel = useAutoCarousel(carouselBrands.length, 4800, page === "inicio");
+
+  useEffect(() => {
+    if (page !== "inicio" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => setHeroSlide(({ index }) => ({
+      index: (index + (window.matchMedia("(max-width: 760px)").matches ? 1 : 2)) % heroPhotos.length,
+      previous: index,
+    })), 5000);
+    return () => window.clearInterval(timer);
+  }, [page]);
+
+  useEffect(() => {
+    if (page !== "inicio") return;
+    const mobile = window.matchMedia("(max-width: 760px)").matches;
+    const nextIndex = (heroSlide.index + (mobile ? 1 : 2)) % heroPhotos.length;
+    const upcoming = mobile ? [nextIndex] : [nextIndex, (nextIndex + 1) % heroPhotos.length];
+    for (const index of upcoming) {
+      const image = new Image();
+      image.src = `/hero/${heroPhotos[index].toLowerCase()}${mobile ? "-mobile" : ""}.webp`;
+    }
+  }, [heroSlide.index, page]);
 
   const filteredProducts = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -217,6 +293,8 @@ function App() {
         .join(" ")
         .toLowerCase()
         .includes(query);
+      if (page === "categoria") return matchesSearch && product.category === routeCategory?.name;
+      if (page === "marca") return matchesSearch && product.brand === routeBrand;
       return matchesSearch
         && (category === "Todos" || product.category === category)
         && (brand === "Todas" || product.brand === brand)
@@ -224,7 +302,7 @@ function App() {
         && (size === "Todas" || product.sizes.includes(size))
         && (color === "Todos" || product.colors.includes(color));
     });
-  }, [brand, catalogProducts, category, color, gender, search, size]);
+  }, [brand, catalogProducts, category, color, gender, page, routeBrand, routeCategory?.name, search, size]);
 
   useEffect(() => {
     const loadCatalog = async () => {
@@ -272,7 +350,7 @@ function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     setMenuOpen(false);
-    if (location.pathname === "/mayoristas") setMode("wholesale");
+    setOpenNavMenu(null);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -280,7 +358,6 @@ function App() {
     const reference = params.get("producto");
     const product = catalogProducts.find((item) => item.reference === reference);
     if (product) {
-      setMode(params.get("tipo") === "mayorista" ? "wholesale" : "retail");
       setSelectedProduct(product);
       setSelectedImage(0);
       setSelectedSize(product.sizes[0] || "");
@@ -288,30 +365,16 @@ function App() {
     }
   }, [catalogProducts, location.search]);
 
-  const goPage = (path: string) => navigate(path);
-  const goWholesalePage = () => {
-    setMode("wholesale");
-    navigate("/mayoristas");
-  };
-  const goHomeSection = (id: string) => {
-    navigate("/");
-    window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 80);
-  };
-
+  const goPage = (path: string) => { setOpenNavMenu(null); setMenuOpen(false); navigate(path); };
+  const openCatalog = () => { setCategory("Todos"); setBrand("Todas"); setGender("Todos"); setSize("Todas"); setColor("Todos"); setSearch(""); goPage("/catalogo"); };
+  const openCategory = (name: Category) => { setSearch(""); goPage(`/categorias/${slugify(name)}`); };
+  const openBrand = (name: string) => { setSearch(""); goPage(`/marcas/${slugify(name)}`); };
   const goTo = (id: string) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const chooseMode = (nextMode: Mode, shouldScroll = false) => {
-    setMode(nextMode);
-    if (shouldScroll) goPage(nextMode === "wholesale" ? "/mayoristas" : "/catalogo");
-  };
-
-  const chooseCategory = (nextCategory: Category) => {
-    setCategory(nextCategory);
-    goPage("/catalogo");
-  };
+  const chooseCategory = openCategory;
 
   const toggleFavorite = (id: number) => {
     setFavorites((current) => {
@@ -362,14 +425,14 @@ function App() {
   const cartMessage = useMemo(() => {
     const lines = Object.values(cart).map((item) => {
       const product = catalogProducts.find((productItem) => productItem.id === item.productId);
-      return product ? `• ${item.quantity} x ${product.name} (${product.reference})${item.size ? ` — talla ${item.size}` : ""}, ${item.color}\n${productLink(product, mode)}` : "";
+      return product ? `• ${item.quantity} x ${product.name} (${product.reference})${item.size ? ` — talla ${item.size}` : ""}, ${item.color}\n${productLink(product)}` : "";
     }).filter(Boolean);
     return [
-      `Hola, quiero cotizar este pedido ${mode === "wholesale" ? "mayorista" : "al detal"}:`,
+      "Hola, quiero cotizar este pedido:",
       ...lines,
       "¿Me confirman disponibilidad, tallas y colores?",
     ].join("\n");
-  }, [cart, catalogProducts, mode]);
+  }, [cart, catalogProducts]);
 
   if (page === "admin") return <BulkUpload />;
 
@@ -378,7 +441,7 @@ function App() {
       <div className="announcement">
         <span>Envíos a toda Colombia</span>
         <span className="announcement__dot" />
-        <span>Atención al detal y por mayor</span>
+        <span>Atención por WhatsApp</span>
       </div>
 
       <header className="header">
@@ -393,13 +456,26 @@ function App() {
 
           <nav className="desktop-nav" aria-label="Navegación principal">
             <button className={page === "inicio" ? "active" : ""} onClick={() => goPage("/")}>Inicio</button>
-            <button onClick={() => goHomeSection("categorias")}>Categorías</button>
-            <button className={page === "catalogo" ? "active" : ""} onClick={() => goPage("/catalogo")}>Catálogo</button>
-            <button className={page === "mayoristas" ? "active" : ""} onClick={goWholesalePage}>Mayoristas</button>
+            <div className="desktop-nav__group" onMouseEnter={() => setOpenNavMenu("categorias")} onMouseLeave={() => setOpenNavMenu(null)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpenNavMenu(null); }}>
+              <button className={page === "categorias" || page === "categoria" ? "active" : ""} onClick={() => setOpenNavMenu(openNavMenu === "categorias" ? null : "categorias")} aria-expanded={openNavMenu === "categorias"}>Categorías <ChevronDown size={14} /></button>
+              {openNavMenu === "categorias" && <div className="desktop-nav__submenu">
+                <button onClick={() => goPage("/categorias")}>Ver todas las categorías <ArrowRight size={15} /></button>
+                {visibleCategories.map((item) => <button key={item.name} onClick={() => openCategory(item.name)}>{item.name}<span>{catalogProducts.filter((product) => product.category === item.name).length}</span></button>)}
+              </div>}
+            </div>
+            <div className="desktop-nav__group" onMouseEnter={() => setOpenNavMenu("marcas")} onMouseLeave={() => setOpenNavMenu(null)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpenNavMenu(null); }}>
+              <button className={page === "marcas" || page === "marca" ? "active" : ""} onClick={() => setOpenNavMenu(openNavMenu === "marcas" ? null : "marcas")} aria-expanded={openNavMenu === "marcas"}>Marcas <ChevronDown size={14} /></button>
+              {openNavMenu === "marcas" && <div className="desktop-nav__submenu desktop-nav__submenu--brands">
+                <button onClick={() => goPage("/marcas")}>Ver todas las marcas <ArrowRight size={15} /></button>
+                {featuredBrands.map((name) => <button key={name} onClick={() => openBrand(name)}>{name}<span>{catalogProducts.filter((product) => product.brand === name).length}</span></button>)}
+              </div>}
+            </div>
+            <button className={page === "catalogo" ? "active" : ""} onClick={openCatalog}>Catálogo</button>
             <button className={page === "contacto" ? "active" : ""} onClick={() => goPage("/contacto")}>Contacto</button>
           </nav>
 
           <div className="header__actions">
+            <button className="icon-button mobile-only" onClick={focusSearch} aria-label="Buscar productos"><Search size={20} /></button>
             <button className="icon-button desktop-search" onClick={focusSearch} aria-label="Buscar">
               <Search size={20} />
             </button>
@@ -418,8 +494,9 @@ function App() {
 
       <main>
         {page === "inicio" && <>
-        <section className="hero" id="inicio">
-          <img className="hero__image" src={heroImage} alt="Moda denim para mujer y hombre" />
+        <section className="hero hero--home" id="inicio">
+          {heroSlide.previous !== null && <HeroSlide index={heroSlide.previous} previous key={`previous-${heroSlide.previous}`} />}
+          <HeroSlide index={heroSlide.index} key={`current-${heroSlide.index}`} />
           <div className="hero__shade" />
           <div className="hero__content container">
             <div className="hero__copy">
@@ -427,11 +504,11 @@ function App() {
               <h1>Denim para<br /><em>tu ritmo.</em></h1>
               <p>Jeans, bermudas, chaquetas, buzos y conjuntos de nuestro catálogo. Explora las prendas sobre modelo y compara cada foto real.</p>
               <div className="hero__buttons">
-                <button className="button button--red" onClick={() => chooseMode("retail", true)}>
-                  Comprar al detal <ArrowRight size={18} />
+                <button className="button button--red" onClick={openCatalog}>
+                  Ver catálogo <ArrowRight size={18} />
                 </button>
-                <button className="button button--glass" onClick={goWholesalePage}>
-                  Soy mayorista
+                <button className="button button--glass" onClick={() => goPage("/categorias")}>
+                  Explorar categorías
                 </button>
               </div>
               <div className="hero__proof">
@@ -445,22 +522,6 @@ function App() {
           </button>
         </section>
 
-        <section className="shopping-mode">
-          <div className="container shopping-mode__inner">
-            <div>
-              <span className="section-kicker">Elige cómo comprar</span>
-              <h2>Una tienda, dos experiencias</h2>
-            </div>
-            <div className="shopping-mode__control">
-              <ModeSwitch mode={mode} onChange={(nextMode) => chooseMode(nextMode, true)} />
-              <div className="shopping-mode__action">
-                <p>{mode === "retail" ? "Encuentra prendas para renovar tu clóset." : "Encuentra prendas para surtir tu negocio."}</p>
-                <button onClick={() => chooseMode(mode, true)}>Ver productos <ArrowRight size={15} /></button>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {bannerCampaign && <section className="store-campaign-banner" style={{ backgroundImage: `linear-gradient(90deg, rgba(9,9,11,.96), rgba(9,9,11,.68) 50%, rgba(9,9,11,.12)), url(${bannerCampaign.product.image})` }}><div className="container"><span>{bannerCampaign.promotion.label || "SELECCIÓN 501"}</span><h2>{bannerCampaign.promotion.title}</h2><p>{bannerCampaign.promotion.description || bannerCampaign.product.name}</p><button type="button" onClick={() => openProduct(bannerCampaign.product)}>Ver producto <ArrowRight size={17} /></button></div></section>}
 
         {featuredCampaigns.length > 0 && <section className="section store-campaign-featured"><div className="container"><div className="section-heading"><div><span className="section-kicker">Elegidos para ti</span><h2>En primer plano</h2></div></div><div className="store-campaign-featured__grid">{featuredCampaigns.slice(0, 3).map(({ promotion, product }) => <button type="button" key={promotion.id} onClick={() => openProduct(product)}><img src={product.image} alt="" loading="lazy" /><div><span>{promotion.label || "DESTACADO"}</span><h3>{promotion.title}</h3><p>{promotion.description || product.name}</p><strong>Ver producto <ArrowRight size={15} /></strong></div></button>)}</div></div></section>}
@@ -472,16 +533,17 @@ function App() {
                 <span className="section-kicker">Encuentra lo tuyo</span>
                 <h2>Compra por categoría</h2>
               </div>
-              <button className="text-link" onClick={() => { setCategory("Todos"); goPage("/catalogo"); }}>
-                Ver todo <ArrowRight size={17} />
+              <button className="text-link" onClick={() => goPage("/categorias")}>
+                Todas las categorías <ArrowRight size={17} />
               </button>
             </div>
+            <div className="carousel-shell">
+            <button className="carousel-arrow carousel-arrow--left" onClick={() => moveCarousel(categoryCarousel.current, -1)} aria-label="Ver categorías anteriores"><ChevronRight size={23} /></button>
             <div className="home-carousel" ref={categoryCarousel} aria-label="Categorías, carrusel automático">
               {[0, 1].map((copy) => <div className="home-carousel__set" data-carousel-set key={copy} aria-hidden={copy === 1 ? true : undefined}>
                 {visibleCategories.map((item) => (
-                  <button className="category-card" data-category={item.name} key={item.name} tabIndex={copy === 1 ? -1 : undefined} onClick={() => chooseCategory(item.name)}>
-                    <img src={item.image} alt="" loading="lazy" />
-                    <div className="category-card__shade" />
+                  <button className="category-card" data-category={item.name} data-model={item.modelImage} key={item.name} tabIndex={copy === 1 ? -1 : undefined} onClick={() => chooseCategory(item.name)}>
+                    <span className="category-card__media"><img src={item.image} alt="" loading="lazy" /></span>
                     <div className="category-card__content">
                       <span>{item.eyebrow}</span>
                       <h3>{item.name}</h3>
@@ -492,21 +554,41 @@ function App() {
                 ))}
               </div>)}
             </div>
+            <button className="carousel-arrow carousel-arrow--right" onClick={() => moveCarousel(categoryCarousel.current, 1)} aria-label="Ver más categorías"><ChevronRight size={23} /></button>
+            </div>
           </div>
         </section>
 
         <section className="brand-strip" aria-label="Marcas destacadas">
           <div className="container brand-strip__inner">
             <div className="brand-strip__heading">
-              <span className="section-kicker">Marcas que encuentras</span>
-              <h2>Elige tu marca favorita</h2>
+              <div><span className="section-kicker">Marcas que encuentras</span><h2>Elige tu marca favorita</h2></div>
+              <div className="brand-strip__controls">
+                <button className="text-link" onClick={() => goPage("/marcas")}>Todas las marcas <ArrowRight size={17} /></button>
+                <button className="brand-strip__arrow brand-strip__arrow--previous" onClick={() => moveCarousel(brandCarousel.current, -1)} aria-label="Ver marcas anteriores"><ChevronRight size={21} /></button>
+                <button className="brand-strip__arrow" onClick={() => moveCarousel(brandCarousel.current, 1)} aria-label="Ver más marcas"><ChevronRight size={21} /></button>
+              </div>
             </div>
+            <div className="carousel-shell carousel-shell--brands">
             <div className="home-carousel home-carousel--brands" ref={brandCarousel} aria-label="Marcas, carrusel automático">
               {[0, 1].map((copy) => <div className="home-carousel__set" data-carousel-set key={copy} aria-hidden={copy === 1 ? true : undefined}>
-                {featuredBrands.map((name) => <button className={`brand-logo brand-logo--${name.toLowerCase().replace(/[^a-z0-9]/g, "")}`} key={name} tabIndex={copy === 1 ? -1 : undefined} aria-label={`Ver productos ${name}`} onClick={() => { setBrand(name); goPage("/catalogo"); }}>
-                  <span className="brand-logo__mark" aria-hidden="true">{name}</span>
+                {carouselBrands.map((name) => <button className={`brand-logo brand-logo--${name.toLowerCase().replace(/[^a-z0-9]/g, "")}`} key={name} tabIndex={copy === 1 ? -1 : undefined} aria-label={`Ver productos ${name}`} onClick={() => openBrand(name)}>
+                  <BrandLogo name={name} />
                 </button>)}
               </div>)}
+            </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="home-editorial">
+          <div className="container home-editorial__inner">
+            <div className="home-editorial__image"><img src="/hero/dsc01412.webp" alt="Look urbano de 501 con chaqueta" loading="lazy" /></div>
+            <div className="home-editorial__copy">
+              <span className="section-kicker">Hecho para tu estilo</span>
+              <h2>Una prenda puede cambiar todo el look.</h2>
+              <p>Explora jeans, chaquetas, camisetas y conjuntos. Entra a cada categoría para encontrar solo las prendas que buscas.</p>
+              <button className="button button--red" onClick={() => goPage("/categorias")}>Explorar categorías <ArrowRight size={18} /></button>
             </div>
           </div>
         </section>
@@ -515,16 +597,15 @@ function App() {
           <div className="container">
             <div className="section-heading">
               <div>
-                <span className="section-kicker">Los favoritos de todos</span>
-                <h2>Más vendidos</h2>
+                <span className="section-kicker">La vitrina 501</span>
+                <h2>Prendas para descubrir</h2>
               </div>
               <button className="text-link" onClick={() => { setCategory("Todos"); setBrand("Todas"); goPage("/catalogo"); }}>Ver catálogo completo <ArrowRight size={17} /></button>
             </div>
             <div className="home-products-grid">
-              {bestSellers.map((product) => <ProductCard
+              {homeProducts.map((product) => <ProductCard
                 key={product.id}
                 product={product}
-                mode={mode}
                 favorite={favorites.has(product.id)}
                 onFavorite={() => toggleFavorite(product.id)}
                 onOpen={() => openProduct(product)}
@@ -535,14 +616,31 @@ function App() {
         </section>
         </>}
 
-        {page === "catalogo" && <section className="section catalog-section" id="catalogo">
+        {page === "categorias" && <section className="section directory-page">
+          <div className="container">
+            <div className="directory-page__heading"><span className="section-kicker">Explora a tu manera</span><h1>Categorías</h1><p>Elige la prenda que buscas y descubre sus referencias.</p></div>
+            <div className="category-directory">{visibleCategories.map((item) => <button className="category-card" data-category={item.name} data-model={item.modelImage} key={item.name} onClick={() => openCategory(item.name)}>
+              <span className="category-card__media"><img src={item.image} alt="" loading="lazy" /></span><div className="category-card__content"><span>{item.eyebrow}</span><h3>{item.name}</h3><small>{catalogProducts.filter((product) => product.category === item.name).length} referencias</small></div><span className="category-card__arrow"><ArrowRight size={18} /></span>
+            </button>)}</div>
+          </div>
+        </section>}
+
+        {page === "marcas" && <section className="section directory-page directory-page--brands">
+          <div className="container">
+            <div className="directory-page__heading"><span className="section-kicker">Encuentra tu favorita</span><h1>Marcas</h1><p>Entra a una marca para ver solamente sus prendas disponibles.</p></div>
+            <div className="brand-directory">{featuredBrands.map((name) => <button className={`brand-logo brand-logo--${name.toLowerCase().replace(/[^a-z0-9]/g, "")}`} key={name} aria-label={`Ver productos ${name}`} onClick={() => openBrand(name)}><BrandLogo name={name} /></button>)}</div>
+          </div>
+        </section>}
+
+        {(page === "catalogo" || page === "categoria" || page === "marca") && <section className="section catalog-section" id="catalogo">
           <div className="container">
             <div className="catalog-top">
               <div>
-                <span className="section-kicker">Catálogo 501</span>
-                <h2><span className="desktop-catalog-title">{mode === "retail" ? "Nuevos favoritos" : "Prendas para tu negocio"}</span><span className="mobile-catalog-title">Catálogo</span></h2>
+                {(page === "categoria" || page === "marca") && <button className="catalog-back" onClick={() => goPage(page === "categoria" ? "/categorias" : "/marcas")}>← Volver a {page === "categoria" ? "categorías" : "marcas"}</button>}
+                <span className="section-kicker">{page === "categoria" ? "Categoría" : page === "marca" ? "Marca" : "Catálogo 501"}</span>
+                <h2>{page === "categoria" ? routeCategory?.name ?? "Categoría" : page === "marca" ? routeBrand ?? "Marca" : "Todas las prendas"}</h2>
               </div>
-              <ModeSwitch mode={mode} onChange={setMode} compact />
+              {page !== "catalogo" && <button className="text-link" onClick={openCatalog}>Ver catálogo completo <ArrowRight size={17} /></button>}
             </div>
 
             <div className="catalog-tools">
@@ -551,35 +649,34 @@ function App() {
                 <input ref={searchRef} value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Busca prenda, marca o referencia" />
                 {(search || searchOpen) && <button onClick={() => { setSearch(""); setSearchOpen(false); }} aria-label="Cerrar búsqueda"><X size={17} /></button>}
               </label>
-              <button className="filter-trigger" onClick={() => setFiltersOpen(true)}>
+              {page === "catalogo" && <button className="filter-trigger" onClick={() => setFiltersOpen(true)}>
                 <SlidersHorizontal size={18} /> Filtrar
                 {activeExtraFilters > 0 && <span className="filter-count">{activeExtraFilters}</span>}
-              </button>
-              <div className="desktop-filters">
+              </button>}
+              {page === "catalogo" && <div className="desktop-filters">
                 <select value={brand} onChange={(event) => setBrand(event.target.value)} aria-label="Filtrar por marca">
                   {brands.map((item) => <option key={item}>{item}</option>)}
                 </select>
                 <select value={gender} onChange={(event) => setGender(event.target.value)} aria-label="Filtrar por género">
                   {genders.map((item) => <option key={item}>{item}</option>)}
                 </select>
-              </div>
+              </div>}
             </div>
 
-            <div className="mobile-filter-chips" aria-label="Filtros rápidos">
+            {page === "catalogo" && <div className="mobile-filter-chips" aria-label="Filtros rápidos">
               <button onClick={() => setFiltersOpen(true)}>{brand === "Todas" ? "Marca" : brand}<ChevronDown size={13} /></button>
               <button onClick={() => setFiltersOpen(true)}>{size === "Todas" ? "Talla" : size}<ChevronDown size={13} /></button>
               <button onClick={() => setFiltersOpen(true)}>{color === "Todos" ? "Color" : color}<ChevronDown size={13} /></button>
-            </div>
+            </div>}
 
-            <div className="category-pills" aria-label="Filtro de categorías">
+            {page !== "marca" && <div className="category-pills" aria-label="Categorías">
               {(["Todos", ...visibleCategories.map((item) => item.name)] as const).map((item) => (
-                <button key={item} className={category === item ? "active" : ""} onClick={() => setCategory(item)}>{item}</button>
+                <button key={item} className={(page === "categoria" ? routeCategory?.name === item : category === item) ? "active" : ""} onClick={() => item === "Todos" ? openCatalog() : page === "categoria" ? openCategory(item) : setCategory(item)}>{item}</button>
               ))}
-            </div>
+            </div>}
 
             <div className="results-line">
               <span>{filteredProducts.length} productos</span>
-              {mode === "wholesale" && <span className="wholesale-note">Consulta para mayoristas</span>}
             </div>
 
             {filteredProducts.length > 0 ? (
@@ -588,7 +685,6 @@ function App() {
                   <ProductCard
                     key={product.id}
                     product={product}
-                    mode={mode}
                     favorite={favorites.has(product.id)}
                     onFavorite={() => toggleFavorite(product.id)}
                     onOpen={() => openProduct(product)}
@@ -600,99 +696,41 @@ function App() {
                 <Search size={30} />
                 <h3>No encontramos coincidencias</h3>
                 <p>Prueba otra búsqueda o limpia los filtros.</p>
-                <button className="button button--dark" onClick={() => { setSearch(""); setCategory("Todos"); setBrand("Todas"); setGender("Todos"); setSize("Todas"); setColor("Todos"); }}>Limpiar filtros</button>
+                <button className="button button--dark" onClick={() => { setSearch(""); setCategory("Todos"); setBrand("Todas"); setGender("Todos"); setSize("Todas"); setColor("Todos"); if (page !== "catalogo") openCatalog(); }}>Ver todos los productos</button>
               </div>
             )}
           </div>
         </section>}
 
-        {page === "inicio" && <section className="promo-section section">
-          <div className="container promo-grid">
-            <article className="promo-card promo-card--red">
-              <span>Combo mayorista</span>
-              <h3>Prendas para<br />tu negocio</h3>
-              <p>Combina tallas y tonos según disponibilidad.</p>
-              <button onClick={() => chooseMode("wholesale", true)}>Ver productos <ArrowRight size={17} /></button>
-            </article>
-            <article className="promo-card promo-card--black">
-              <span>Envío nacional</span>
-              <h3>Tu pedido,<br />donde estés.</h3>
-              <p>Despachos seguros a ciudades de toda Colombia.</p>
-              <a href={whatsappLink("Hola, quiero consultar el envío de un pedido de 501.")} target="_blank" rel="noreferrer">Consultar envío <ArrowRight size={17} /></a>
-            </article>
+        {page === "inicio" && <section className="home-service">
+          <div className="container home-service__inner">
+            <span className="section-kicker">Del almacén a tu ciudad</span>
+            <h2>Encuentra tu prenda. Nosotros te ayudamos con el resto.</h2>
+            <p>Consulta tallas, colores y disponibilidad por WhatsApp. Enviamos pedidos a toda Colombia.</p>
+            <a href={whatsappLink("Hola, quiero consultar un pedido y las opciones de envío de 501.")} target="_blank" rel="noopener noreferrer">Hablar con 501 <ArrowRight size={18} /></a>
           </div>
         </section>}
 
-        {page === "mayoristas" && <>
-          <section className="hero hero--wholesale" id="mayoristas">
-            <img className="hero__image" src={heroImage} alt="Moda denim para surtir tu negocio" />
-            <div className="hero__shade" />
-            <div className="hero__content container">
-              <div className="hero__copy">
-                <div className="hero__eyebrow"><Sparkles size={15} /> Para tu negocio</div>
-                <h1>Denim para<br /><em>crecer.</em></h1>
-                <p>Surte tu negocio con referencias que sí se mueven y acompañamiento en cada pedido.</p>
-                <div className="hero__buttons">
-                  <button className="button button--red" onClick={() => document.querySelector(".wholesale-catalog-section")?.scrollIntoView({ behavior: "smooth" })}>
-                    Ver catálogo mayorista <ArrowRight size={18} />
-                  </button>
-                  <a className="button button--glass" href={whatsappLink("Hola, quiero recibir información y catálogo mayorista de 501.")} target="_blank" rel="noreferrer">
-                    Hablar con un asesor
-                  </a>
-                </div>
-                <div className="hero__proof">
-                  <span><Check size={15} /> Mezcla referencias</span>
-                  <span><Check size={15} /> Envíos nacionales</span>
-                </div>
-              </div>
+        {page === "inicio" && <section className="social-section">
+          <div className="container social-section__inner">
+            <div className="social-section__intro">
+              <span className="section-kicker">501 en redes</span>
+              <h2>Síguenos. Siempre estamos sacando looks y promociones exclusivas.</h2>
+              <p>Encuentra novedades, videos y prendas recién llegadas en nuestros perfiles.</p>
             </div>
-          </section>
+            <SocialLinks />
+          </div>
+        </section>}
 
-          <section className="wholesale-steps-section">
-            <div className="container wholesale-steps-heading">
-              <span className="section-kicker section-kicker--light">Comprar es muy fácil</span>
-              <h2>Tu pedido mayorista en 3 pasos</h2>
+        {page === "inicio" && <section className="home-video">
+          <div className="container home-video__inner">
+            <div className="home-video__intro">
+              <span className="section-kicker">Mira lo que pasa en 501</span>
+              <h2>Un vistazo al almacén.</h2>
+              <p>Te compartimos uno de nuestros videos en Instagram. Síguenos para ver lo que llega y las promociones que publicamos.</p>
+              <a href="https://www.instagram.com/p/DX13_Mcg3BM/" target="_blank" rel="noopener noreferrer">Ver publicación en Instagram <ArrowRight size={18} /></a>
             </div>
-            <div className="container wholesale-steps">
-              <div><b>01</b><span><strong>Elige tus prendas</strong><small>Filtra el catálogo y arma tu selección.</small></span></div>
-              <div><b>02</b><span><strong>Cotiza por WhatsApp</strong><small>Confirmamos stock, tallas y precio final.</small></span></div>
-              <div><b>03</b><span><strong>Recibe tu pedido</strong><small>Enviamos de forma segura a tu ciudad.</small></span></div>
-            </div>
-          </section>
-        </>}
-
-        {page === "mayoristas" && <section className="section wholesale-catalog-section">
-          <div className="container">
-            <div className="section-heading wholesale-catalog-heading">
-              <div>
-                <span className="section-kicker">Para tu negocio</span>
-                <h2>Catálogo mayorista</h2>
-                <p>Consulta por WhatsApp cada referencia y su disponibilidad para tu negocio.</p>
-              </div>
-              <button className="text-link" onClick={() => goPage("/catalogo")}>Ver catálogo al detal <ArrowRight size={17} /></button>
-            </div>
-
-            <div className="category-pills wholesale-category-pills" aria-label="Categorías mayoristas">
-              {(["Todos", ...visibleCategories.map((item) => item.name)] as const).map((item) => (
-                <button key={item} className={category === item ? "active" : ""} onClick={() => setCategory(item)}>{item}</button>
-              ))}
-            </div>
-
-            <div className="results-line">
-              <span>{filteredProducts.length} productos para mayoristas</span>
-              <span className="wholesale-note">Consulta para mayoristas</span>
-            </div>
-
-            {filteredProducts.length > 0 ? <div className="product-grid wholesale-product-grid">
-              {filteredProducts.map((product) => <ProductCard
-                key={product.id}
-                product={product}
-                mode="wholesale"
-                favorite={favorites.has(product.id)}
-                onFavorite={() => toggleFavorite(product.id)}
-                onOpen={() => openProduct(product)}
-              />)}
-            </div> : <div className="empty-state"><Search size={30} /><h3>No hay productos con estos filtros</h3><button className="button button--dark" onClick={() => { setCategory("Todos"); setBrand("Todas"); setGender("Todos"); setSize("Todas"); setColor("Todos"); }}>Mostrar todos</button></div>}
+            <div className="home-video__embed"><iframe title="Video de Almacén 501 en Instagram" src="https://www.instagram.com/p/DX13_Mcg3BM/embed/" loading="lazy" allow="encrypted-media; picture-in-picture" referrerPolicy="strict-origin-when-cross-origin" /></div>
           </div>
         </section>}
 
@@ -709,7 +747,7 @@ function App() {
             <div>
               <span className="section-kicker">Estamos para ayudarte</span>
               <h1>Hablemos de<br />tu próximo pedido.</h1>
-              <p>Cuéntanos qué prendas buscas, si compras al detal o al por mayor, y te ayudamos a confirmar tallas, colores y disponibilidad.</p>
+              <p>Cuéntanos qué prendas buscas y te ayudamos a confirmar tallas, colores y disponibilidad.</p>
               <div className="contact-address"><MapPin size={22} /><div><strong>Visítanos en 501</strong><address>Carrera 12 # 6-06<br />Barrio Valencia</address></div></div>
             </div>
             <div className="contact-card">
@@ -727,13 +765,14 @@ function App() {
         <div className="container footer__grid">
           <div>
             <div className="footer-brand"><span>501</span><small>DENIM & STYLE</small></div>
-            <p>Moda urbana para comprar al detal y al por mayor, fácil desde tu celular.</p>
+            <p>Moda urbana y atención cercana para elegir tus prendas desde el celular.</p>
+            <SocialLinks compact />
           </div>
           <div className="footer-links">
             <strong>Explora</strong>
-            <button onClick={() => goPage("/catalogo")}>Catálogo</button>
-            <button onClick={() => goHomeSection("categorias")}>Categorías</button>
-            <button onClick={goWholesalePage}>Mayoristas</button>
+            <button onClick={openCatalog}>Catálogo</button>
+            <button onClick={() => goPage("/categorias")}>Categorías</button>
+            <button onClick={() => goPage("/marcas")}>Marcas</button>
           </div>
           <div className="footer-links">
             <strong>Ayuda</strong>
@@ -760,9 +799,9 @@ function App() {
 
       <nav className="bottom-nav" aria-label="Navegación móvil">
         <button className={page === "inicio" ? "active" : ""} onClick={() => goPage("/")}><Home size={20} /><span>Inicio</span></button>
-        <button className={page === "catalogo" ? "active" : ""} onClick={() => goPage("/catalogo")}><Store size={20} /><span>Catálogo</span></button>
-        <button className={page === "mayoristas" ? "active" : ""} onClick={goWholesalePage}><BadgePercent size={20} /><span>Mayorista</span></button>
-        <button onClick={focusSearch}><Search size={20} /><span>Buscar</span></button>
+        <button className={page === "categorias" || page === "categoria" ? "active" : ""} onClick={() => { setMobileNavSection("categorias"); setMenuOpen(true); }}><Store size={20} /><span>Categorías</span></button>
+        <button className={page === "marcas" || page === "marca" ? "active" : ""} onClick={() => { setMobileNavSection("marcas"); setMenuOpen(true); }}><Sparkles size={20} /><span>Marcas</span></button>
+        <button className={page === "catalogo" ? "active" : ""} onClick={openCatalog}><Search size={20} /><span>Catálogo</span></button>
         <a href={whatsappLink("Hola, vengo del catálogo web de 501.")} target="_blank" rel="noreferrer"><MessageCircle size={20} /><span>WhatsApp</span></a>
       </nav>
 
@@ -773,12 +812,13 @@ function App() {
               <div className="footer-brand footer-brand--dark"><span>501</span><small>DENIM & STYLE</small></div>
               <button className="icon-button" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú"><X /></button>
             </div>
-            <ModeSwitch mode={mode} onChange={setMode} />
             <div className="mobile-menu__links">
               <button onClick={() => goPage("/")}>Inicio <ChevronRight /></button>
-              <button onClick={() => goHomeSection("categorias")}>Categorías <ChevronRight /></button>
-              <button onClick={() => goPage("/catalogo")}>Catálogo <ChevronRight /></button>
-              <button onClick={goWholesalePage}>Mayoristas <ChevronRight /></button>
+              <button aria-expanded={mobileNavSection === "categorias"} onClick={() => setMobileNavSection(mobileNavSection === "categorias" ? null : "categorias")}>Categorías <ChevronDown /></button>
+              {mobileNavSection === "categorias" && <div className="mobile-menu__submenu"><button onClick={() => goPage("/categorias")}>Ver todas</button>{visibleCategories.map((item) => <button key={item.name} onClick={() => openCategory(item.name)}>{item.name}</button>)}</div>}
+              <button aria-expanded={mobileNavSection === "marcas"} onClick={() => setMobileNavSection(mobileNavSection === "marcas" ? null : "marcas")}>Marcas <ChevronDown /></button>
+              {mobileNavSection === "marcas" && <div className="mobile-menu__submenu"><button onClick={() => goPage("/marcas")}>Ver todas</button>{featuredBrands.map((name) => <button key={name} onClick={() => openBrand(name)}>{name}</button>)}</div>}
+              <button onClick={openCatalog}>Catálogo <ChevronRight /></button>
               <button onClick={() => goPage("/contacto")}>Contacto <ChevronRight /></button>
             </div>
             <a className="button button--red menu-whatsapp" href={whatsappLink("Hola, vengo del catálogo web de 501.")} target="_blank" rel="noreferrer"><MessageCircle size={18} /> Comprar por WhatsApp</a>
@@ -804,7 +844,6 @@ function App() {
         <div className="overlay" onMouseDown={() => setCartOpen(false)}>
           <aside className="cart-drawer" onMouseDown={(event) => event.stopPropagation()}>
             <div className="drawer-head"><div><span className="section-kicker">Tu selección</span><h3>Mi pedido ({cartCount})</h3></div><button className="icon-button" onClick={() => setCartOpen(false)} aria-label="Cerrar pedido"><X /></button></div>
-            <ModeSwitch mode={mode} onChange={setMode} compact />
             <div className="cart-items">
               {cartCount === 0 ? (
                 <div className="cart-empty"><ShoppingBag size={34} /><h4>Tu pedido está vacío</h4><p>Agrega prendas y te ayudamos a confirmar todo por WhatsApp.</p><button className="button button--dark" onClick={() => { setCartOpen(false); goPage("/catalogo"); }}>Ver catálogo</button></div>
@@ -837,12 +876,14 @@ function App() {
               <h3>{selectedProduct.name}</h3>
               <p>{selectedProduct.description}</p>
               {(selectedProduct.images?.length || 0) > 1 && <div className="product-thumbnails">{selectedProduct.images!.map((image, index) => <button type="button" className={selectedImage === index ? "active" : ""} onClick={() => setSelectedImage(index)} key={image} aria-label={selectedProduct.badge === "Vista en modelo" ? (index === 0 ? "Ver vista en modelo" : "Ver foto real de la prenda") : `Ver foto ${index + 1}`}><img src={image} alt="" /></button>)}</div>}
-              {mode === "wholesale" && selectedProduct.minimum > 1 && <p>Pedido mayorista desde {selectedProduct.minimum} unidades.</p>}
               <div className="product-options">
                 {selectedProduct.sizes.length > 0 && <div><b>Elige tu talla</b><span>{selectedProduct.sizes.map((size) => <button type="button" className={selectedSize === size ? "active" : ""} key={size} onClick={() => setSelectedSize(size)}>{size}{selectedSize === size && <Check size={12} />}</button>)}</span></div>}
                 <div><b>Elige el color</b><span>{selectedProduct.colors.map((color) => <button type="button" className={selectedColor === color ? "active" : ""} key={color} onClick={() => setSelectedColor(color)}>{color}</button>)}</span></div>
               </div>
-              <a className="button button--whatsapp modal-add" href={whatsappLink(productMessage(selectedProduct, mode, selectedSize, selectedColor))} target="_blank" rel="noreferrer"><MessageCircle size={18} /> Preguntar por este producto</a>
+              <div className="product-modal__inquiries">
+                <a className="button button--whatsapp" href={whatsappLink(productMessage(selectedProduct, "retail", selectedSize, selectedColor))} target="_blank" rel="noreferrer"><MessageCircle size={18} /> Consultar este producto</a>
+                <a className="button button--outline" href={whatsappLink(productMessage(selectedProduct, "wholesale", selectedSize, selectedColor))} target="_blank" rel="noreferrer">Soy mayorista · consultar precio{selectedProduct.minimum > 1 ? ` (mín. ${selectedProduct.minimum})` : ""}</a>
+              </div>
               <button className="modal-whatsapp" onClick={() => { addToCart(selectedProduct, selectedSize, selectedColor); setSelectedProduct(null); }}>Agregar a mi pedido <ShoppingBag size={18} /></button>
             </div>
           </article>
@@ -871,20 +912,19 @@ function App() {
   );
 }
 
-function ProductCard({ product, mode, favorite, onFavorite, onOpen }: {
+function ProductCard({ product, favorite, onFavorite, onOpen }: {
   product: Product;
-  mode: Mode;
   favorite: boolean;
   onFavorite: () => void;
   onOpen: () => void;
 }) {
-  const modelPhoto = /-modelo\.[a-z0-9]+(?:\?|$)/i.test(product.image);
+  const modelPhoto = isModelPhoto(product);
   const imageFocus = modelPhoto
     ? product.category === "Jeans" ? "jeans"
       : product.category === "Bermudas" ? "bermudas"
         : product.category === "Conjuntos" ? "full"
           : "upper"
-    : "full";
+    : "product";
 
   return (
     <article className="product-card">
@@ -898,9 +938,8 @@ function ProductCard({ product, mode, favorite, onFavorite, onOpen }: {
         <div className="product-card__tags"><span>{product.brand}</span><span>{product.colors.join(", ")}</span></div>
         <h3 onClick={onOpen}>{product.name}</h3>
         <span className="product-card__ref">Ref. {product.reference}</span>
-        {mode === "wholesale" && product.minimum > 1 && <span className="product-card__minimum">Mín. {product.minimum} und.</span>}
         <div className="product-card__sizes">{product.sizes.length ? product.sizes.slice(0, 5).map((size) => <span key={size}>{size}</span>) : <span>Tallas por consultar</span>}</div>
-        <a className="add-button" href={whatsappLink(productMessage(product, mode))} target="_blank" rel="noreferrer" aria-label={`Preguntar por ${product.name} en WhatsApp`}><MessageCircle size={17} /><span>Preguntar por WhatsApp</span></a>
+        <button className="add-button" onClick={onOpen} aria-label={`Ver opciones de ${product.name}`}><ArrowRight size={17} /><span>Ver producto</span></button>
       </div>
     </article>
   );
