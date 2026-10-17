@@ -1,0 +1,8 @@
+Pillow>=12,<13
+numpy>=2.3,<3
+opencv-python-headless>=4.9
+rembg[cpu]>=2.0.85,<3
+torch>=2
+torchvision>=0.28
+easyocr>=1.7.2,<2
+# Opcional para --google-vision: google-cloud-vision>=3

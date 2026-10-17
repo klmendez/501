@@ -1,0 +1,46 @@
+{
+  "source": "D:/W/501/PRODUCTOS",
+  "generator": "OpenAI image_gen, identity-preserve",
+  "products": [
+    {
+      "reference": "501-FOTO-004",
+      "sourcePhotoId": 4
+    },
+    {
+      "reference": "501-FOTO-029",
+      "sourcePhotoId": 29
+    },
+    {
+      "reference": "501-FOTO-032",
+      "sourcePhotoId": 32
+    },
+    {
+      "reference": "501-FOTO-044",
+      "sourcePhotoId": 44
+    },
+    {
+      "reference": "501-FOTO-045",
+      "sourcePhotoId": 45
+    },
+    {
+      "reference": "501-FOTO-052",
+      "sourcePhotoId": 52
+    },
+    {
+      "reference": "501-FOTO-059",
+      "sourcePhotoId": 59
+    },
+    {
+      "reference": "501-FOTO-063",
+      "sourcePhotoId": 63
+    },
+    {
+      "reference": "501-FOTO-071",
+      "sourcePhotoId": 71
+    },
+    {
+      "reference": "501-FOTO-099",
+      "sourcePhotoId": 99
+    }
+  ]
+}

@@ -1,0 +1,1316 @@
+[
+  {
+    "id": 1001,
+    "name": "Jean negro de pierna recta",
+    "reference": "501-FOTO-001",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/001-marca-por-confirmar-negro-modelo.webp",
+    "images": [
+      "/productos-501/001-marca-por-confirmar-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Jean negro de pierna recta. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1002,
+    "name": "Jean azul oscuro recto",
+    "reference": "501-FOTO-002",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/002-marca-por-confirmar-azul-oscuro-modelo.webp",
+    "images": [
+      "/productos-501/002-marca-por-confirmar-azul-oscuro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul oscuro"
+    ],
+    "description": "Jean azul oscuro recto. Color: Azul oscuro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1006,
+    "name": "Jean azul de lavado medio",
+    "reference": "501-FOTO-006",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/006-marca-por-confirmar-azul-modelo.webp",
+    "images": [
+      "/productos-501/006-marca-por-confirmar-azul-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul"
+    ],
+    "description": "Jean azul de lavado medio. Color: Azul. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1004,
+    "name": "Chaqueta roja y negra con capucha",
+    "reference": "501-FOTO-004",
+    "brand": "Superdry",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/004-superdry-rojo-negro-modelo.webp",
+    "images": [
+      "/productos-501/004-superdry-rojo-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Rojo, negro"
+    ],
+    "description": "Chaqueta roja y negra con capucha. Color: Rojo, negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1009,
+    "name": "Conjunto de camisa y bermuda blanco",
+    "reference": "501-FOTO-009",
+    "brand": "BOSS",
+    "category": "Conjuntos",
+    "gender": "Hombre",
+    "image": "/productos-501/009-marca-por-confirmar-blanco-modelo.webp",
+    "images": [
+      "/productos-501/009-marca-por-confirmar-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Blanco"
+    ],
+    "description": "Conjunto de camisa y bermuda blanco. Color: Blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1010,
+    "name": "Conjunto de camisa y bermuda beige",
+    "reference": "501-FOTO-010",
+    "brand": "BOSS",
+    "category": "Conjuntos",
+    "gender": "Hombre",
+    "image": "/productos-501/010-marca-por-confirmar-beige-modelo.webp",
+    "images": [
+      "/productos-501/010-marca-por-confirmar-beige-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Beige"
+    ],
+    "description": "Conjunto de camisa y bermuda beige. Color: Beige. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1011,
+    "name": "Conjunto de camisa y bermuda gris",
+    "reference": "501-FOTO-011",
+    "brand": "BOSS",
+    "category": "Conjuntos",
+    "gender": "Hombre",
+    "image": "/productos-501/011-marca-por-confirmar-gris-modelo.webp",
+    "images": [
+      "/productos-501/011-marca-por-confirmar-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris"
+    ],
+    "description": "Conjunto de camisa y bermuda gris. Color: Gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1012,
+    "name": "Polo verde con ribetes claros",
+    "reference": "501-FOTO-012",
+    "brand": "Carolina Herrera",
+    "category": "Camisas",
+    "gender": "Hombre",
+    "image": "/productos-501/012-marca-por-confirmar-verde-modelo.webp",
+    "images": [
+      "/productos-501/012-marca-por-confirmar-verde-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Verde"
+    ],
+    "description": "Polo verde con ribetes claros. Color: Verde. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1013,
+    "name": "Conjunto deportivo rojo con detalles blancos",
+    "reference": "501-FOTO-013",
+    "brand": "Sin marca identificada",
+    "category": "Conjuntos",
+    "gender": "Hombre",
+    "image": "/productos-501/013-marca-por-confirmar-rojo-blanco-modelo.webp",
+    "images": [
+      "/productos-501/013-marca-por-confirmar-rojo-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Rojo, blanco"
+    ],
+    "description": "Conjunto deportivo rojo con detalles blancos. Color: Rojo, blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1014,
+    "name": "Polo gris de manga corta",
+    "reference": "501-FOTO-014",
+    "brand": "Everlasting",
+    "category": "Camisas",
+    "gender": "Hombre",
+    "image": "/productos-501/014-marca-por-confirmar-gris-modelo.webp",
+    "images": [
+      "/productos-501/014-marca-por-confirmar-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris"
+    ],
+    "description": "Polo gris de manga corta. Color: Gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1015,
+    "name": "Polo blanco de manga corta",
+    "reference": "501-FOTO-015",
+    "brand": "Diesel",
+    "category": "Camisas",
+    "gender": "Hombre",
+    "image": "/productos-501/015-marca-por-confirmar-blanco-modelo.webp",
+    "images": [
+      "/productos-501/015-marca-por-confirmar-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Blanco"
+    ],
+    "description": "Polo blanco de manga corta. Color: Blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1016,
+    "name": "Bermuda negra con salpicaduras decorativas",
+    "reference": "501-FOTO-016",
+    "brand": "Dsquared2",
+    "category": "Bermudas",
+    "gender": "Hombre",
+    "image": "/productos-501/016-dsquared2-negro-modelo.webp",
+    "images": [
+      "/productos-501/016-dsquared2-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Bermuda negra con salpicaduras decorativas. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1017,
+    "name": "Surtido de jeans azules con desgaste",
+    "reference": "501-FOTO-017",
+    "brand": "Dsquared2",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/017-marca-por-confirmar-azul-modelo.webp",
+    "images": [
+      "/productos-501/017-marca-por-confirmar-azul-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul"
+    ],
+    "description": "Surtido de jeans azules con desgaste. Color: Azul. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1020,
+    "name": "Bermuda negra vista posterior",
+    "reference": "501-FOTO-020",
+    "brand": "Purple Brand",
+    "category": "Bermudas",
+    "gender": "Hombre",
+    "image": "/productos-501/020-marca-por-confirmar-negro-modelo.webp",
+    "images": [
+      "/productos-501/020-marca-por-confirmar-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Bermuda negra vista posterior. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1021,
+    "name": "Bermuda oscura vista posterior",
+    "reference": "501-FOTO-021",
+    "brand": "Diesel",
+    "category": "Bermudas",
+    "gender": "Hombre",
+    "image": "/productos-501/021-marca-por-confirmar-gris-oscuro-modelo.webp",
+    "images": [
+      "/productos-501/021-marca-por-confirmar-gris-oscuro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris oscuro"
+    ],
+    "description": "Bermuda oscura vista posterior. Color: Gris oscuro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1022,
+    "name": "Bermuda negra con desgaste",
+    "reference": "501-FOTO-022",
+    "brand": "Purple Brand",
+    "category": "Bermudas",
+    "gender": "Hombre",
+    "image": "/productos-501/022-marca-por-confirmar-negro-modelo.webp",
+    "images": [
+      "/productos-501/022-marca-por-confirmar-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Bermuda negra con desgaste. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1023,
+    "name": "Bermuda gris lisa",
+    "reference": "501-FOTO-023",
+    "brand": "Diesel",
+    "category": "Bermudas",
+    "gender": "Hombre",
+    "image": "/productos-501/023-marca-por-confirmar-gris-modelo.webp",
+    "images": [
+      "/productos-501/023-marca-por-confirmar-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris"
+    ],
+    "description": "Bermuda gris lisa. Color: Gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1025,
+    "name": "Bermuda gris con lavado desgastado",
+    "reference": "501-FOTO-025",
+    "brand": "Diesel",
+    "category": "Bermudas",
+    "gender": "Hombre",
+    "image": "/productos-501/025-marca-por-confirmar-gris-modelo.webp",
+    "images": [
+      "/productos-501/025-marca-por-confirmar-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris"
+    ],
+    "description": "Bermuda gris con lavado desgastado. Color: Gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1026,
+    "name": "Bermuda de jean azul claro",
+    "reference": "501-FOTO-026",
+    "brand": "Americanino",
+    "category": "Bermudas",
+    "gender": "Hombre",
+    "image": "/productos-501/026-marca-por-confirmar-azul-claro-modelo.webp",
+    "images": [
+      "/productos-501/026-marca-por-confirmar-azul-claro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul claro"
+    ],
+    "description": "Bermuda de jean azul claro. Color: Azul claro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1028,
+    "name": "Jean azul oscuro recto",
+    "reference": "501-FOTO-028",
+    "brand": "Dmente",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/028-marca-por-confirmar-azul-oscuro-modelo.webp",
+    "images": [
+      "/productos-501/028-marca-por-confirmar-azul-oscuro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul oscuro"
+    ],
+    "description": "Jean azul oscuro recto. Color: Azul oscuro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1029,
+    "name": "Chaqueta acolchada azul rey con capucha",
+    "reference": "501-FOTO-029",
+    "brand": "Columbia",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/029-columbia-azul-rey-modelo.webp",
+    "images": [
+      "/productos-501/029-columbia-azul-rey-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul rey"
+    ],
+    "description": "Chaqueta acolchada azul rey con capucha. Color: Azul rey. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1030,
+    "name": "Jean negro de lavado oscuro",
+    "reference": "501-FOTO-030",
+    "brand": "Dmente",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/030-marca-por-confirmar-negro-modelo.webp",
+    "images": [
+      "/productos-501/030-marca-por-confirmar-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Jean negro de lavado oscuro. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1031,
+    "name": "Jean negro con desgaste en muslos",
+    "reference": "501-FOTO-031",
+    "brand": "Dmente",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/031-marca-por-confirmar-negro-modelo.webp",
+    "images": [
+      "/productos-501/031-marca-por-confirmar-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Jean negro con desgaste en muslos. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1032,
+    "name": "Chaqueta acolchada verde oliva con capucha",
+    "reference": "501-FOTO-032",
+    "brand": "Superdry",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/032-marca-por-confirmar-verde-oliva-modelo.webp",
+    "images": [
+      "/productos-501/032-marca-por-confirmar-verde-oliva-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Verde oliva"
+    ],
+    "description": "Chaqueta acolchada verde oliva con capucha. Color: Verde oliva. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1033,
+    "name": "Jean azul con detalles desgastados",
+    "reference": "501-FOTO-033",
+    "brand": "Dsquared2",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/033-marca-por-confirmar-azul-modelo.webp",
+    "images": [
+      "/productos-501/033-marca-por-confirmar-azul-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul"
+    ],
+    "description": "Jean azul con detalles desgastados. Color: Azul. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1034,
+    "name": "Chaqueta acolchada azul grisáceo con capucha",
+    "reference": "501-FOTO-034",
+    "brand": "Columbia",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/034-marca-por-confirmar-azul-grisaceo-modelo.webp",
+    "images": [
+      "/productos-501/034-marca-por-confirmar-azul-grisaceo-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul grisáceo"
+    ],
+    "description": "Chaqueta acolchada azul grisáceo con capucha. Color: Azul grisáceo. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1035,
+    "name": "Jean azul con desgaste frontal",
+    "reference": "501-FOTO-035",
+    "brand": "Dsquared2",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/035-marca-por-confirmar-azul-modelo.webp",
+    "images": [
+      "/productos-501/035-marca-por-confirmar-azul-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul"
+    ],
+    "description": "Jean azul con desgaste frontal. Color: Azul. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1036,
+    "name": "Jean azul con roturas frontales",
+    "reference": "501-FOTO-036",
+    "brand": "Dsquared2",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/036-marca-por-confirmar-azul-modelo.webp",
+    "images": [
+      "/productos-501/036-marca-por-confirmar-azul-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul"
+    ],
+    "description": "Jean azul con roturas frontales. Color: Azul. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1037,
+    "name": "Jean negro con desgaste localizado",
+    "reference": "501-FOTO-037",
+    "brand": "Dsquared2",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/037-marca-por-confirmar-negro-modelo.webp",
+    "images": [
+      "/productos-501/037-marca-por-confirmar-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Jean negro con desgaste localizado. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1038,
+    "name": "Jean azul con parches y desgaste",
+    "reference": "501-FOTO-038",
+    "brand": "Dsquared2",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/038-marca-por-confirmar-azul-modelo.webp",
+    "images": [
+      "/productos-501/038-marca-por-confirmar-azul-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul"
+    ],
+    "description": "Jean azul con parches y desgaste. Color: Azul. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1039,
+    "name": "Jean azul oscuro con desgaste leve",
+    "reference": "501-FOTO-039",
+    "brand": "Dsquared2",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/039-marca-por-confirmar-azul-oscuro-modelo.webp",
+    "images": [
+      "/productos-501/039-marca-por-confirmar-azul-oscuro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul oscuro"
+    ],
+    "description": "Jean azul oscuro con desgaste leve. Color: Azul oscuro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1043,
+    "name": "Jean azul con detalles desgastados",
+    "reference": "501-FOTO-043",
+    "brand": "Sin marca identificada",
+    "category": "Jeans",
+    "gender": "Hombre",
+    "image": "/productos-501/043-marca-por-confirmar-azul-modelo.webp",
+    "images": [
+      "/productos-501/043-marca-por-confirmar-azul-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul"
+    ],
+    "description": "Jean azul con detalles desgastados. Color: Azul. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1044,
+    "name": "Chaqueta acolchada blanca con capucha",
+    "reference": "501-FOTO-044",
+    "brand": "Columbia",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/044-marca-por-confirmar-blanco-modelo.webp",
+    "images": [
+      "/productos-501/044-marca-por-confirmar-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Blanco"
+    ],
+    "description": "Chaqueta acolchada blanca con capucha. Color: Blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1045,
+    "name": "Chaqueta acolchada café y negra",
+    "reference": "501-FOTO-045",
+    "brand": "The North Face",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/045-the-north-face-cafe-negro-modelo.webp",
+    "images": [
+      "/productos-501/045-the-north-face-cafe-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Café, negro"
+    ],
+    "description": "Chaqueta acolchada café y negra. Color: Café, negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1046,
+    "name": "Chaqueta acolchada verde con capucha",
+    "reference": "501-FOTO-046",
+    "brand": "Superdry",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/046-marca-por-confirmar-verde-modelo.webp",
+    "images": [
+      "/productos-501/046-marca-por-confirmar-verde-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Verde"
+    ],
+    "description": "Chaqueta acolchada verde con capucha. Color: Verde. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1050,
+    "name": "Chaqueta acolchada beige con capucha",
+    "reference": "501-FOTO-050",
+    "brand": "The North Face",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/050-marca-por-confirmar-beige-modelo.webp",
+    "images": [
+      "/productos-501/050-marca-por-confirmar-beige-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Beige"
+    ],
+    "description": "Chaqueta acolchada beige con capucha. Color: Beige. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1052,
+    "name": "Chaqueta acolchada azul marino y roja",
+    "reference": "501-FOTO-052",
+    "brand": "Superdry",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/052-marca-por-confirmar-azul-marino-rojo-modelo.webp",
+    "images": [
+      "/productos-501/052-marca-por-confirmar-azul-marino-rojo-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul marino, rojo"
+    ],
+    "description": "Chaqueta acolchada azul marino y roja. Color: Azul marino, rojo. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1053,
+    "name": "Chaqueta acolchada beige con capucha",
+    "reference": "501-FOTO-053",
+    "brand": "Columbia",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/053-marca-por-confirmar-beige-modelo.webp",
+    "images": [
+      "/productos-501/053-marca-por-confirmar-beige-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Beige"
+    ],
+    "description": "Chaqueta acolchada beige con capucha. Color: Beige. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1054,
+    "name": "Chaqueta acolchada café oscuro con capucha",
+    "reference": "501-FOTO-054",
+    "brand": "Sin marca identificada",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/054-marca-por-confirmar-cafe-oscuro-modelo.webp",
+    "images": [
+      "/productos-501/054-marca-por-confirmar-cafe-oscuro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Café oscuro"
+    ],
+    "description": "Chaqueta acolchada café oscuro con capucha. Color: Café oscuro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1056,
+    "name": "Buzo azul con capucha y estampado frontal",
+    "reference": "501-FOTO-056",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/056-superdry-azul-modelo.webp",
+    "images": [
+      "/productos-501/056-superdry-azul-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul"
+    ],
+    "description": "Buzo azul con capucha y estampado frontal. Color: Azul. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1057,
+    "name": "Chaqueta azul con mangas claras y capucha",
+    "reference": "501-FOTO-057",
+    "brand": "Sin marca identificada",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/057-marca-por-confirmar-azul-blanco-modelo.webp",
+    "images": [
+      "/productos-501/057-marca-por-confirmar-azul-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul, blanco"
+    ],
+    "description": "Chaqueta azul con mangas claras y capucha. Color: Azul, blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1059,
+    "name": "Buzo rojo con estampado 54",
+    "reference": "501-FOTO-059",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/059-superdry-rojo-modelo.webp",
+    "images": [
+      "/productos-501/059-superdry-rojo-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Rojo"
+    ],
+    "description": "Buzo rojo con estampado 54. Color: Rojo. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1061,
+    "name": "Buzo verde agua con capucha",
+    "reference": "501-FOTO-061",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/061-marca-por-confirmar-verde-agua-modelo.webp",
+    "images": [
+      "/productos-501/061-marca-por-confirmar-verde-agua-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Verde agua"
+    ],
+    "description": "Buzo verde agua con capucha. Color: Verde agua. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1062,
+    "name": "Buzo azul marino con capucha y cordones blancos",
+    "reference": "501-FOTO-062",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/062-marca-por-confirmar-azul-marino-modelo.webp",
+    "images": [
+      "/productos-501/062-marca-por-confirmar-azul-marino-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul marino"
+    ],
+    "description": "Buzo azul marino con capucha y cordones blancos. Color: Azul marino. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1063,
+    "name": "Buzo negro con cremallera y logo frontal",
+    "reference": "501-FOTO-063",
+    "brand": "Diesel",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/063-diesel-negro-modelo.webp",
+    "images": [
+      "/productos-501/063-diesel-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Buzo negro con cremallera y logo frontal. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1064,
+    "name": "Buzo azul marino y gris con capucha",
+    "reference": "501-FOTO-064",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/064-superdry-azul-marino-gris-modelo.webp",
+    "images": [
+      "/productos-501/064-superdry-azul-marino-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul marino, gris"
+    ],
+    "description": "Buzo azul marino y gris con capucha. Color: Azul marino, gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1066,
+    "name": "Buzo azul marino con cremallera y detalles naranjas",
+    "reference": "501-FOTO-066",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/066-superdry-azul-marino-naranja-modelo.webp",
+    "images": [
+      "/productos-501/066-superdry-azul-marino-naranja-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul marino, naranja"
+    ],
+    "description": "Buzo azul marino con cremallera y detalles naranjas. Color: Azul marino, naranja. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1070,
+    "name": "Buzo café con capucha y estampado frontal",
+    "reference": "501-FOTO-070",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/070-superdry-cafe-modelo.webp",
+    "images": [
+      "/productos-501/070-superdry-cafe-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Café"
+    ],
+    "description": "Buzo café con capucha y estampado frontal. Color: Café. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1071,
+    "name": "Buzo rojo de cuello alto con media cremallera",
+    "reference": "501-FOTO-071",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/071-superdry-rojo-modelo.webp",
+    "images": [
+      "/productos-501/071-superdry-rojo-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Rojo"
+    ],
+    "description": "Buzo rojo de cuello alto con media cremallera. Color: Rojo. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1073,
+    "name": "Buzo negro con capucha y estampado rojo",
+    "reference": "501-FOTO-073",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/073-superdry-negro-modelo.webp",
+    "images": [
+      "/productos-501/073-superdry-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Buzo negro con capucha y estampado rojo. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1074,
+    "name": "Buzo negro con capucha y estampado Vintage",
+    "reference": "501-FOTO-074",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/074-superdry-negro-modelo.webp",
+    "images": [
+      "/productos-501/074-superdry-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Buzo negro con capucha y estampado Vintage. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1075,
+    "name": "Buzo verde con capucha y franjas oscuras",
+    "reference": "501-FOTO-075",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/075-superdry-verde-gris-modelo.webp",
+    "images": [
+      "/productos-501/075-superdry-verde-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Verde, gris"
+    ],
+    "description": "Buzo verde con capucha y franjas oscuras. Color: Verde, gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1077,
+    "name": "Conjunto negro de camisa y bermuda",
+    "reference": "501-FOTO-077",
+    "brand": "BOSS",
+    "category": "Conjuntos",
+    "gender": "Hombre",
+    "image": "/productos-501/077-marca-por-confirmar-negro-modelo.webp",
+    "images": [
+      "/productos-501/077-marca-por-confirmar-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Conjunto negro de camisa y bermuda. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1078,
+    "name": "Buzo gris con capucha y letras 1892",
+    "reference": "501-FOTO-078",
+    "brand": "Abercrombie",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/078-abercrombie-gris-modelo.webp",
+    "images": [
+      "/productos-501/078-abercrombie-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris"
+    ],
+    "description": "Buzo gris con capucha y letras 1892. Color: Gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1080,
+    "name": "Buzo gris con capucha y logo frontal",
+    "reference": "501-FOTO-080",
+    "brand": "Diesel",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/080-diesel-gris-modelo.webp",
+    "images": [
+      "/productos-501/080-diesel-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris"
+    ],
+    "description": "Buzo gris con capucha y logo frontal. Color: Gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1081,
+    "name": "Buzo azul marino con capucha y logo frontal",
+    "reference": "501-FOTO-081",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/081-superdry-azul-marino-modelo.webp",
+    "images": [
+      "/productos-501/081-superdry-azul-marino-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul marino"
+    ],
+    "description": "Buzo azul marino con capucha y logo frontal. Color: Azul marino. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1082,
+    "name": "Chaqueta negra estilo bomber",
+    "reference": "501-FOTO-082",
+    "brand": "Diesel",
+    "category": "Chaquetas",
+    "gender": "Hombre",
+    "image": "/productos-501/082-marca-por-confirmar-negro-modelo.webp",
+    "images": [
+      "/productos-501/082-marca-por-confirmar-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "description": "Chaqueta negra estilo bomber. Color: Negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1083,
+    "name": "Buzo azul marino con capucha y estampado Athletic",
+    "reference": "501-FOTO-083",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/083-superdry-azul-marino-modelo.webp",
+    "images": [
+      "/productos-501/083-superdry-azul-marino-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul marino"
+    ],
+    "description": "Buzo azul marino con capucha y estampado Athletic. Color: Azul marino. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1084,
+    "name": "Buzo blanco de cuello redondo con logo",
+    "reference": "501-FOTO-084",
+    "brand": "Diesel",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/084-diesel-blanco-modelo.webp",
+    "images": [
+      "/productos-501/084-diesel-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Blanco"
+    ],
+    "description": "Buzo blanco de cuello redondo con logo. Color: Blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1085,
+    "name": "Buzo blanco de cuello redondo con logo azul",
+    "reference": "501-FOTO-085",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/085-superdry-blanco-modelo.webp",
+    "images": [
+      "/productos-501/085-superdry-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Blanco"
+    ],
+    "description": "Buzo blanco de cuello redondo con logo azul. Color: Blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1087,
+    "name": "Camiseta blanca con estampado de calavera",
+    "reference": "501-FOTO-087",
+    "brand": "Philipp Plein",
+    "category": "Camisetas",
+    "gender": "Hombre",
+    "image": "/productos-501/087-philipp-plein-blanco-modelo.webp",
+    "images": [
+      "/productos-501/087-philipp-plein-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Blanco"
+    ],
+    "description": "Camiseta blanca con estampado de calavera. Color: Blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1088,
+    "name": "Camiseta gris con gráfico circular",
+    "reference": "501-FOTO-088",
+    "brand": "Diesel",
+    "category": "Camisetas",
+    "gender": "Hombre",
+    "image": "/productos-501/088-marca-por-confirmar-gris-modelo.webp",
+    "images": [
+      "/productos-501/088-marca-por-confirmar-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris"
+    ],
+    "description": "Camiseta gris con gráfico circular. Color: Gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1089,
+    "name": "Camiseta gris de manga corta",
+    "reference": "501-FOTO-089",
+    "brand": "Diesel",
+    "category": "Camisetas",
+    "gender": "Hombre",
+    "image": "/productos-501/089-marca-por-confirmar-gris-modelo.webp",
+    "images": [
+      "/productos-501/089-marca-por-confirmar-gris-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris"
+    ],
+    "description": "Camiseta gris de manga corta. Color: Gris. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1090,
+    "name": "Camiseta blanca con gráfico rojo",
+    "reference": "501-FOTO-090",
+    "brand": "Diesel",
+    "category": "Camisetas",
+    "gender": "Hombre",
+    "image": "/productos-501/090-diesel-blanco-rojo-modelo.webp",
+    "images": [
+      "/productos-501/090-diesel-blanco-rojo-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Blanco, rojo"
+    ],
+    "description": "Camiseta blanca con gráfico rojo. Color: Blanco, rojo. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1091,
+    "name": "Camiseta blanca con logo rojo",
+    "reference": "501-FOTO-091",
+    "brand": "Diesel",
+    "category": "Camisetas",
+    "gender": "Hombre",
+    "image": "/productos-501/091-diesel-blanco-rojo-modelo.webp",
+    "images": [
+      "/productos-501/091-diesel-blanco-rojo-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Blanco, rojo"
+    ],
+    "description": "Camiseta blanca con logo rojo. Color: Blanco, rojo. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1092,
+    "name": "Buzo azul marino y blanco con cremallera",
+    "reference": "501-FOTO-092",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/092-superdry-azul-marino-blanco-modelo.webp",
+    "images": [
+      "/productos-501/092-superdry-azul-marino-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul marino, blanco"
+    ],
+    "description": "Buzo azul marino y blanco con cremallera. Color: Azul marino, blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1094,
+    "name": "Buzo verde lima con capucha",
+    "reference": "501-FOTO-094",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/094-superdry-verde-lima-modelo.webp",
+    "images": [
+      "/productos-501/094-superdry-verde-lima-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Verde lima"
+    ],
+    "description": "Buzo verde lima con capucha. Color: Verde lima. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1095,
+    "name": "Buzo amarillo con capucha y logo blanco",
+    "reference": "501-FOTO-095",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/095-superdry-amarillo-modelo.webp",
+    "images": [
+      "/productos-501/095-superdry-amarillo-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Amarillo"
+    ],
+    "description": "Buzo amarillo con capucha y logo blanco. Color: Amarillo. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1096,
+    "name": "Buzo café con capucha y logo blanco",
+    "reference": "501-FOTO-096",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/096-superdry-cafe-modelo.webp",
+    "images": [
+      "/productos-501/096-superdry-cafe-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Café"
+    ],
+    "description": "Buzo café con capucha y logo blanco. Color: Café. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1097,
+    "name": "Buzo camuflado gris con capucha",
+    "reference": "501-FOTO-097",
+    "brand": "Diesel",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/097-marca-por-confirmar-gris-negro-modelo.webp",
+    "images": [
+      "/productos-501/097-marca-por-confirmar-gris-negro-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Gris, negro"
+    ],
+    "description": "Buzo camuflado gris con capucha. Color: Gris, negro. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1098,
+    "name": "Buzo azul marino con capucha y texto rosa",
+    "reference": "501-FOTO-098",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/098-superdry-azul-marino-modelo.webp",
+    "images": [
+      "/productos-501/098-superdry-azul-marino-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul marino"
+    ],
+    "description": "Buzo azul marino con capucha y texto rosa. Color: Azul marino. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1099,
+    "name": "Buzo rojo y blanco con logo frontal",
+    "reference": "501-FOTO-099",
+    "brand": "Diesel",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/099-diesel-rojo-blanco-modelo.webp",
+    "images": [
+      "/productos-501/099-diesel-rojo-blanco-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Rojo, blanco"
+    ],
+    "description": "Buzo rojo y blanco con logo frontal. Color: Rojo, blanco. Tallas, precio y disponibilidad por WhatsApp."
+  },
+  {
+    "id": 1100,
+    "name": "Buzo azul marino con capucha y logo naranja",
+    "reference": "501-FOTO-100",
+    "brand": "Superdry",
+    "category": "Buzos",
+    "gender": "Hombre",
+    "image": "/productos-501/100-superdry-azul-marino-modelo.webp",
+    "images": [
+      "/productos-501/100-superdry-azul-marino-modelo.webp"
+    ],
+    "minimum": 1,
+    "sizes": [],
+    "colors": [
+      "Azul marino"
+    ],
+    "description": "Buzo azul marino con capucha y logo naranja. Color: Azul marino. Tallas, precio y disponibilidad por WhatsApp."
+  }
+]

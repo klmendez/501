@@ -1,7 +1,12 @@
 node_modules/
 dist/
+.netlify/
+.tmp-import-test/
 .visual-check/
 .env
+.env.migration.local
 .DS_Store
 *.local
 *.tsbuildinfo
+__pycache__/
+*.pyc
